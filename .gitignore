@@ -18,3 +18,7 @@
 
 /.idea
 /log
+.ruby-gemset
+.ruby-version
+# Ignore application configuration
+/config/application.yml
