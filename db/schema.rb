@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150920181454) do
+ActiveRecord::Schema.define(version: 20150921143918) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,14 +20,15 @@ ActiveRecord::Schema.define(version: 20150920181454) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "code"
   end
 
   create_table "food_items", force: :cascade do |t|
     t.string   "name"
-    t.integer  "food_categories_id"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
-    t.string   "ndbno"
+    t.integer  "food_category_id"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.string   "nutrient_databank_number"
     t.string   "food_group_code"
     t.string   "short_description"
     t.string   "manufacturer_name"
@@ -38,9 +39,11 @@ ActiveRecord::Schema.define(version: 20150920181454) do
     t.float    "protein_factor"
     t.float    "fat_factor"
     t.float    "carbohydrate_factor"
+    t.string   "long_description"
+    t.string   "common_names"
   end
 
-  add_index "food_items", ["food_categories_id"], name: "index_food_items_on_food_categories_id", using: :btree
+  add_index "food_items", ["food_category_id"], name: "index_food_items_on_food_category_id", using: :btree
 
   create_table "foods_nutrients", force: :cascade do |t|
     t.integer  "food_item_id"
@@ -80,6 +83,7 @@ ActiveRecord::Schema.define(version: 20150920181454) do
     t.string   "footnote_text",            null: false
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+    t.integer  "footnote_id"
   end
 
   add_index "footnotes", ["food_item_id"], name: "index_footnotes_on_food_item_id", using: :btree

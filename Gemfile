@@ -20,7 +20,9 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'faraday'
 gem 'faraday-detailed_logger'
-gem 'usda-nutrient-database'
+#gem 'usda-nutrient-database'
+gem 'rubyzip'
+gem 'smarter_csv'
 gem 'figaro'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
