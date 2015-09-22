@@ -4,15 +4,10 @@ module UsdaNutrientDatabase
 
       private
 
-      def apply_typecasts(row)
-        row[6] = row[6].present?
-        row
-      end
-
-      def find_or_initialize(row)
+      def find_or_initialize(chunk_item)
         FoodItem.find_or_initialize_by(
-            id: strip_leading_zeros_from_keys(row[0]),
-            food_category_id: strip_leading_zeros_from_keys(row[1])
+            id: strip_leading_zeros_from_keys(chunk_item[:nutrient_databank_number]),
+            food_category_id: strip_leading_zeros_from_keys(chunk_item[:food_group_code])
         )
       end
 
@@ -32,8 +27,6 @@ module UsdaNutrientDatabase
       def log_import_started
         Rails.logger.debug 'Importing foods'
       end
-
-
 
     end
   end

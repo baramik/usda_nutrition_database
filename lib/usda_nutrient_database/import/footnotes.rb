@@ -4,11 +4,11 @@ module UsdaNutrientDatabase
 
       private
 
-      def find_or_initialize(row)
+      def find_or_initialize(chunk_item)
         Footnote.find_or_initialize_by(
-            food_item_id: strip_leading_zeros_from_keys(row[0]),
-            footnote_id: strip_leading_zeros_from_keys(row[1]),
-            nutrient_id: strip_leading_zeros_from_keys(row[3])
+            food_item_id: strip_leading_zeros_from_keys(chunk_item[:nutrient_databank_number]),
+            footnote_id: strip_leading_zeros_from_keys(chunk_item[:footnote_number]),
+            nutrient_id: strip_leading_zeros_from_keys(chunk_item[:nutrient_number])
         )
       end
 

@@ -14,10 +14,10 @@ module UsdaNutrientDatabase
         ]
       end
 
-      def find_or_initialize(row)
+      def find_or_initialize(chunk_item)
         FoodsNutrient.find_or_initialize_by(
-            food_item_id: row[0],
-            nutrient_id: row[1]
+            food_item_id: strip_leading_zeros_from_keys(chunk_item[:nutrient_databank_number]),
+            nutrient_id: strip_leading_zeros_from_keys(chunk_item[:nutrient_number])
         )
       end
 
