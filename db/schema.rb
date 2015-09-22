@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150921143918) do
+ActiveRecord::Schema.define(version: 20150922094915) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -117,6 +117,12 @@ ActiveRecord::Schema.define(version: 20150921143918) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.string   "nutrient_code"
+    t.string   "nutrient_number"
+    t.string   "units"
+    t.string   "tagname"
+    t.string   "nutrient_description"
+    t.string   "number_decimal_places"
+    t.string   "sort_record_order"
   end
 
   add_index "nutrients", ["nutrient_categories_id"], name: "index_nutrients_on_nutrient_categories_id", using: :btree
