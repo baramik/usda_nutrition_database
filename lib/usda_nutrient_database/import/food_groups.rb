@@ -4,16 +4,22 @@ module UsdaNutrientDatabase
 
       private
 
-      def find_or_initialize(chunk_item)
-        FoodCategory.find_or_initialize_by(id: strip_leading_zeros_from_keys(chunk_item[:code]))
-      end
-
       def columns
-        @columns ||= %w(code name)
+        %w(code name)
       end
 
       def filename
         'FD_GROUP.txt'
+      end
+
+      def import_class
+        'FoodCategory'.constantize
+      end
+
+      def additional_import_values(chunk_item)
+        {
+            id: strip_leading_zeros_from_keys(chunk_item[:code])
+        }
       end
 
       def log_import_started

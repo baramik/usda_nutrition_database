@@ -2,6 +2,7 @@ require 'csv'
 require 'benchmark'
 require 'active_record'
 require 'activerecord-import'
+require 'upsert/active_record_upsert'
 
 module UsdaNutrientDatabase
   module Import
@@ -12,34 +13,44 @@ module UsdaNutrientDatabase
 
       def import
         log_import_started
-        obj_array = []
         file = File.open(file_location, 'r:iso-8859-1:utf-8')
         SmarterCSV.process(file, csv_options) do |chunk|
           chunk.each do |chunk_item|
-            obj = build_object(chunk_item)
-            obj_array << obj
-          end
-          class_name = obj_array.first.class.name.constantize
-          class_name.transaction do
-            obj_array.each(&:save!)
+            additional_values = additional_import_values(chunk_item)
+            array_to_transform = [chunk_item, additional_values, rails_timestamps_hash]
+            transformed_to_hash_array = array_to_transform.reduce(&:merge)
+            final_hash = transformed_to_hash_array.reject do |key, value|
+              value.blank?
+            end
+            import_class.upsert(final_hash)
           end
         end
         file.close
       end
-
       private
 
       attr_reader :directory
 
-      def build_object(chunk_item)
-        find_or_initialize(chunk_item).tap do |object|
-          chunk_item.each do |key, value|
-            object.send("#{key}=", value)
-          end
-        end
+      def rails_timestamps_hash
+        {
+            created_at: Time.now,
+            updated_at: Time.now
+        }
+      end
+
+      def modified_chunk_item(chunk_item)
+        chunk_item
+      end
+
+      def additional_import_values(chunk_item)
+        {}
       end
 
       def columns
+        raise NotImplementedError
+      end
+
+      def import_class
         raise NotImplementedError
       end
 
@@ -58,10 +69,13 @@ module UsdaNutrientDatabase
 
       def strip_leading_zeros_from_keys(row)
         stripped_row = row.sub(/^0+/, '')
-        if stripped_row.nil?
-          row.to_i
-        else
-          stripped_row.to_i
+        case stripped_row
+          when nil
+            row.to_i
+          when ''
+            row
+          else
+            stripped_row.to_i
         end
       end
 

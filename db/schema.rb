@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150922094915) do
+ActiveRecord::Schema.define(version: 20150923101500) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 20150922094915) do
     t.float    "carbohydrate_factor"
     t.string   "long_description"
     t.string   "common_names"
+    t.string   "scientific_name"
   end
 
   add_index "food_items", ["food_category_id"], name: "index_food_items_on_food_category_id", using: :btree
@@ -48,15 +49,15 @@ ActiveRecord::Schema.define(version: 20150922094915) do
   create_table "foods_nutrients", force: :cascade do |t|
     t.integer  "food_item_id"
     t.integer  "nutrient_id"
-    t.string   "nutrient_databank_number",     null: false
-    t.string   "nutrient_number",              null: false
-    t.float    "nutrient_value",               null: false
-    t.integer  "num_data_points",              null: false
+    t.string   "nutrient_databank_number",                     null: false
+    t.string   "nutrient_number",                              null: false
+    t.float    "nutrient_value",                               null: false
+    t.integer  "num_data_points",                              null: false
     t.float    "standard_error"
-    t.string   "src_code",                     null: false
+    t.string   "src_code",                                     null: false
     t.string   "derivation_code"
     t.string   "ref_nutrient_databank_number"
-    t.boolean  "add_nutrient_mark"
+    t.boolean  "add_nutrient_mark",            default: false
     t.integer  "num_studies"
     t.float    "min"
     t.float    "max"
@@ -66,8 +67,8 @@ ActiveRecord::Schema.define(version: 20150922094915) do
     t.string   "statistical_comments"
     t.string   "add_mod_date"
     t.string   "confidence_code"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
   end
 
   add_index "foods_nutrients", ["food_item_id"], name: "index_foods_nutrients_on_food_item_id", using: :btree

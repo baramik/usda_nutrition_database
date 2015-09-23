@@ -14,15 +14,19 @@ module UsdaNutrientDatabase
         ]
       end
 
-      def find_or_initialize(chunk_item)
-        FoodsNutrient.find_or_initialize_by(
-            food_item_id: strip_leading_zeros_from_keys(chunk_item[:nutrient_databank_number]),
-            nutrient_id: strip_leading_zeros_from_keys(chunk_item[:nutrient_number])
-        )
-      end
-
       def filename
         'NUT_DATA.txt'
+      end
+
+      def import_class
+        'FoodsNutrient'.constantize
+      end
+
+      def additional_import_values(chunk_item)
+        {
+            food_item_id: strip_leading_zeros_from_keys(chunk_item[:nutrient_databank_number]),
+            nutrient_id: strip_leading_zeros_from_keys(chunk_item[:nutrient_number])
+        }
       end
 
       def log_import_started
