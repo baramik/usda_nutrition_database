@@ -31,6 +31,7 @@ gem 'sass-rails', '~> 5.0'
 #Authentication & Authorization
 gem 'devise'
 gem 'cancancan'
+gem 'activeadmin', github: 'activeadmin'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
