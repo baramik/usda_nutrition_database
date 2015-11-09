@@ -1,0 +1,42 @@
+<div id="page-wrapper" ng-class="{'open': toggle}" ng-cloak>
+
+  <!-- Sidebar -->
+  <div id="sidebar-wrapper">
+    <ul class="sidebar">
+      <li class="sidebar-main">
+        <a ng-click="toggleSidebar()">
+          Fitness Platform
+          <span class="menu-icon glyphicon glyphicon-transfer"></span>
+        </a>
+      </li>
+      <li class="sidebar-title"><span>NAVIGATION</span></li>
+      <li class="sidebar-list">
+        <a ui-sref="food_items">Food Items <span class="menu-icon fa fa-table"></span></a>
+      </li>
+    </ul>
+  </div>
+  <!-- End Sidebar -->
+
+  <div id="content-wrapper">
+    <div class="page-content">
+
+      <!-- Header Bar -->
+      <div class="row header">
+        <div class="col-xs-12">
+          <div class="user pull-right">
+          </div>
+          <div class="meta">
+            <div class="page">
+              Dashboard
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End Header Bar -->
+
+      <!-- Main Content -->
+      <div ui-view></div>
+
+    </div><!-- End Page Content -->
+  </div><!-- End Content Wrapper -->
+</div><!-- End Page Wrapper -->

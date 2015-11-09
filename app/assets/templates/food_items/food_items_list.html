@@ -1,0 +1,63 @@
+<div class="row">
+  <div class="col-md-12 col-lg-12">
+
+    <div class="table-responsive">
+      <table class="table table-stripped">
+        <thead>
+          <tr>
+            <th>id</th>
+            <!--<th>Name</th>-->
+            <th>Nutrient databank number</th>
+            <th>Food Group Code</th>
+            <th>Short Description</th>
+            <!--<th>Manufacturer name</th>-->
+            <!--<th>Survey</th>-->
+            <!--<th>Refuse description</th>-->
+            <!--<th>Percentage refuse</th>-->
+            <!--<th>Nitrogen factor</th>-->
+            <!--<th>Protein factor</th>-->
+            <!--<th>Fat factor</th>-->
+            <!--<th>Carbohydrate factor</th>-->
+            <!--<th>Long description</th>-->
+            <!--<th>Common names</th>-->
+            <!--<th>Scientific name</th>-->
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="foodItem in foodItems">
+            <td>{{foodItem.id}}</td>
+            <!--<td>{{foodItem.name}}</td>-->
+            <td>{{foodItem.nutrient_databank_number}}</td>
+            <td>{{foodItem.food_group_code}}</td>
+            <td>{{foodItem.short_description}}</td>
+            <!--<td>{{foodItem.manufacturer_name}}</td>-->
+            <!--<td>{{foodItem.survey}}</td>-->
+            <!--<td>{{foodItem.refuse_description}}</td>-->
+            <!--<td>{{foodItem.percentage_refuse}}</td>-->
+            <!--<td>{{foodItem.nitrogen_factor}}</td>-->
+            <!--<td>{{foodItem.protein_factor}}</td>-->
+            <!--<td>{{foodItem.fat_factor}}</td>-->
+            <!--<td>{{foodItem.carbohydrate_factor}}</td>-->
+            <!--<td>{{foodItem.long_description}}</td>-->
+            <!--<td>{{foodItem.common_names}}</td>-->
+            <!--<td>{{foodItem.scientific_name}}</td>-->
+            <td>
+              <span>
+                <a ui-sref="food_item_details{'id': 1}" class="btn">
+                  <i class="fa fa-list"></i> View details
+                </a>
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <uib-pagination total-items="pagination_options.total_items"
+                ng-model="pagination_options.current_page"
+                max-size="pagination_options.max_size" class="pagination-sm" boundary-links="true"
+                rotate="false" items-per-page="pagination_options.items_per_page"
+                ng-change="loadPage()">
+    </uib-pagination>
+  </div>
+</div>

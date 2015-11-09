@@ -28,11 +28,18 @@ gem 'jquery-rails'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'sass-rails', '~> 5.0'
 
+
 #Authentication & Authorization
 gem 'devise'
 gem 'cancancan'
 gem 'activeadmin', github: 'activeadmin'
 
+#Handling angular templates with rails
+gem 'angular-rails-templates'
+gem 'bower-rails'
+gem 'puma'
+gem 'kaminari'
+gem 'quiet_assets', group: :development
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

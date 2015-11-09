@@ -9,9 +9,15 @@
 //
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
-//
 //= require jquery
-//= require jquery_ujs
-//= require bootstrap-sprockets
-//= require turbolinks
+//= require jquery-ui
+//= require angular
+//= require angular-cookies
+//= require angular-bootstrap
+//= require angular-ui-router
+//= require angular-rails-templates
+//= require lodash
+//= require restangular
+//= require angular-loading-bar/build/loading-bar.min
+//= require_tree ../templates
 //= require_tree .
