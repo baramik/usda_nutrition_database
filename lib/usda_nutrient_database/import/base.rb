@@ -18,7 +18,7 @@ module UsdaNutrientDatabase
           chunk.each do |chunk_item|
             # byebug
             additional_values = additional_import_values(chunk_item)
-            array_to_transform = [additional_values, chunk_item]
+            array_to_transform = [chunk_item, additional_values, rails_timestamps_hash]
             transformed_to_hash_array = array_to_transform.reduce(&:merge)
             final_hash = transformed_to_hash_array.reject do |key, value|
               value.blank?
@@ -31,6 +31,13 @@ module UsdaNutrientDatabase
       private
 
       attr_reader :directory
+
+      def rails_timestamps_hash
+        {
+            created_at: Time.now,
+            updated_at: Time.now
+        }
+      end
 
       def modified_chunk_item(chunk_item)
         chunk_item
