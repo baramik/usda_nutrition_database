@@ -1,12 +1,11 @@
 class AdminUserService
 
-  def initialize(user, roles = {})
+  def initialize(user)
     @user = user
-    @roles = roles
   end
 
   def create_admin_user
-    user = @user.update(@roles)
+    user = @user.update(admin: true)
     if user
       Rails.logger.info 'User has been updated'
     else
